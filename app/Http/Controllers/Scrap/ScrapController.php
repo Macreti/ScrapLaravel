@@ -25,8 +25,15 @@ class ScrapController extends Controller
 
         $response = curl_exec($ch);
         curl_close( $ch );
+        //$html = htmlspecialchars($response); //To visualise html code.
+        //echo $html;
+        $start = strpos($response, 'id="tab_cat_new-years-sales_sw_woo_tab_cat_slider_1"');
+        //dd($start);
+        $end = stripos($response, '</div>', $offset = $start);
+        $length = $end - $start;
+        $htmlSection = substr($response, $start, $length);
 
-        return htmlspecialchars($response);
+        return $htmlSection;
     }
 
     public function getHtml(){
