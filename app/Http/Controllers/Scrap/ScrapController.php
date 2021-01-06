@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Scrap;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use PHPHtmlParser\Dom;
 
 class ScrapController extends Controller
 {
@@ -27,17 +28,36 @@ class ScrapController extends Controller
         curl_close( $ch );
         //$html = htmlspecialchars($response); //To visualise html code.
         //echo $html;
-        $start = strpos($response, 'id="tab_cat_new-years-sales_sw_woo_tab_cat_slider_1"');
+        $start = stripos($response, 'class="resp-slider-container"');
         //dd($start);
-        $end = stripos($response, '</div>', $offset = $start);
+        $end = stripos($response, 'class="vc_row-full-width vc_clearfix"', $offset = $start);
         $length = $end - $start;
         $htmlSection = substr($response, $start, $length);
+        $dom = new Dom;
+        $test = $dom->loadStr($htmlSection);
+        $a = $test->find('.item.product.clearfix');
+        //echo count($a);
 
-        return $htmlSection;
+        foreach ($a as $content)
+        {
+            // do something with the html
+            $html = htmlspecialchars($content->innerHtml);
+
+            echo "{$html}";
+        }
+        /*preg_match_all('@<div class="item product clearfix">(.+)</div>@', htmlspecialchars($htmlSection), $matches);
+        $listItems = $matches[1];
+
+        foreach ($listItems as $item) {
+            echo "{$item}\n\n";
+        }*/
+
+        //return htmlspecialchars($htmlSection);
     }
 
     public function getHtml(){
         $html = file_get_contents('https://jabeas.com/');
+        $html = htmlspecialchars($html);
 
         echo $html;
     }

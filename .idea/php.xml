@@ -103,6 +103,11 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/vendor/php-http/promise" />
+      <path value="$PROJECT_DIR$/vendor/php-http/httplug" />
+      <path value="$PROJECT_DIR$/vendor/paquettg/string-encode" />
+      <path value="$PROJECT_DIR$/vendor/paquettg/php-html-parser" />
     </include_path>
   </component>
   <component name="PhpUnit">
